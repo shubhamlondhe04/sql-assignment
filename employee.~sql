@@ -1,0 +1,230 @@
+
+
+
+---------- 1.  Write create table syntax for employee table
+CREATE TABLE EMPLOYEE 
+( EMP_ID NUMBER,
+FIRST_NAME V,
+ 
+drop table emp1;
+---------3.	Get all employee details from the employee table
+SELECT *FROM EMP1;
+-----------2. WRITE SYNTAX FOR INSERT data into table of employee table and Incentive table
+insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1001,'Shubham','Pawar',200000,'20-jan-2004','tech');
+ insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1002,'John','Abraham',100000,'01-jan-13','Banking');
+ insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1003,'Michel','clarke',800000,'01-jan-13','insurence');
+ insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1004,'Roy','Thomas',700000,'01-feb-13','Banking');
+ insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1005,'Tom','Jose',600000,'01-feb-13','insurence');
+ insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1006,'Jerry','Pinto',650000,'01-feb-13','insurence');
+ insert into EMP1(emp_id,first_name,Last_name,salary,joining_date,Department)
+ values(1007,'Philip','Mathew',750000,'01-jan-13','services');
+ 
+ 
+ ------------------- 	Write create table syntax for employee Incentive table
+CREATE TABLE INCENTIVE (
+ EMPLOYEE_REF_ID INT,
+ INCENTIVE_DATE VARCHAR2(20),
+ INCENTIVE_AMMOUNT INT
+ );
+ 
+ DROP TABLE INCENTIVE; 
+ INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10001,'01- JUN-2004',50000);
+  INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10002,'01- JUN-2013',55000);
+  INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10003,'01- JUN-2013',50000);
+ INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10004,'01- JUL-2013',50000);
+ INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10005,'01- JUL-2013',60000);
+ INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10006,'01- JUL-2013',75000);
+ INSERT INTO INCENTIVE (  EMPLOYEE_REF_ID ,INCENTIVE_DATE,INCENTIVE_AMMOUNT)
+ VALUES (10007,'01- JUN-2013',50000);
+SELECT*FROM INCENTIVE;
+
+---------4.	Get First_Name,Last_Name from employee table
+SELECT first_name,Last_name FROM EMP1;
+
+
+
+-----5.	Get First_Name from employee table using alias name “Employee Name”
+select INITCAP (first_name) as Employee_Name from EMP1;
+
+-----6.	Get First_Name from employee table in upper case
+select UPPER (first_name),UPPER(last_name)  from EMP1;
+------7.	Select first 3 characters of FIRST_NAME from EMPLOYEE
+select SUBSTR(first_name, 1,3) as short_name from EMP1;
+------8.	Get position of 'o' in name 'John' from employee table
+select instr(first_name, 'o') from EMP1;
+-------9.	Get FIRST_NAME from employee table after removing white spaces from right side.
+select rtrim(first_name)from emp1;
+--------10.	Get First_Name from employee table after replacing 'o' with '$'
+select replace (first_name,'o','$') from emp1;
+---------11.	Get First_Name and Last_Name as single column from employee table separated by a '_'
+select First_Name,Last_Name,First_Name||'_'||Last_Name from emp1;
+----------12.	Get FIRST_NAME, Joiningyear, Joining Month and Joining Date from employee table
+select First_Name,joining_date from emp1;
+---------13.	Get all employee details from the employee table order by First_Name Ascending
+select * from emp1
+order by First_Name asc;
+-----14.	Get all employee details from the employee table order by First_Name Ascending and Salary Descending?
+select * from emp1
+order by First_Name asc,salary desc;
+-----15. Get employee details from employee table whose employee name is “John”
+select * from employee where first_name='John';
+----16.	Get employee details from employee table whose employee name are “John” and “Roy”
+select * from employee where first_name in('John','Roy');
+----17.	Get employee details from employee table whose employee name are not “John” and “Roy”.
+select * from employee where first_name like 'J%';
+
+----19. Get employee details from employee table whose first name contains 'o'.
+select * from employee where first_name like '%o%';
+
+----20. Get employee details from employee table whose first name ends with 'n'.
+select * from employee where first_name like '%n';
+
+----21. Get employee details from employee table whose first name ends with 'n' and name contains 4 letters.
+select * from employee where first_name like '___n';
+
+----22. Get employee details from employee table whose first name starts with 'J' and name contains 4 letters.
+select * from employee where first_name like 'J___';
+
+----23. Get employee details from employee table who’s Salary greater than 600000.
+select * from employee where salary > 600000;
+
+----24. Get employee details from employee table whose joining year is “2013”.
+select * from employee where extract(year from(joining_date))= 2013;
+
+----25. Get employee details from employee table whose joining month is “January”.
+select * from employee where extract( month from (joining_date))= 1;
+
+----26. Get employee details from employee table who joined before January 1st 2013.
+select * from employee where joining_date < '01-Jan-13';
+
+----27. Get employee details from employee table who joined after January 31st
+select * from employee where joining_date > '01-Jan-13';
+
+----28. Get Joining Date and Time from employee table
+select to_char(joining_date,'dd-mon-yy hh:mm:ss') from employee;
+
+----29. Get Joining Date, Time including milliseconds from employee table
+select to_char(joining_date,'dd-mon-yy hh:mm:ss:mmm') from employee;
+
+----30. Get difference between JOINING_DATE and INCENTIVE_DATE from employee and incentives table.
+select months_between(joining_date,incentive_date) from employee e join incentives i on emp_id = employee_ref_id
+
+----31. Get department, total salary with respect to a department from employee table.
+select department , sum(salary) total_sal from employee
+group by department ;
+
+----32. Get department, total salary with respect to a department from employee table order by total salary descending.
+select department , sum(salary) total_sal from employee
+group by department 
+order by sum(salary) desc;
+
+----33. Get department, no of employees in a department, total salary with respect to a department from employee table order by total salary descending.
+select department ,count(*), sum(salary) total_sal from employee
+group by department 
+order by sum(salary) desc;
+
+----34. Get department wise average salary from employee table order by salary ascending?
+select department , avg(salary)avg_sal from employee
+group by department 
+order by avg(salary) ;
+
+----35. Get department wise maximum salary from employee table order by salary ascending?
+select department , max(salary) max_sal from employee
+group by department 
+order by max(salary) ;
+
+----36. Get department wise minimum salary from employee table order by salary ascending?
+select department , min(salary) min_sal from employee
+group by department 
+order by min(salary) ;
+
+----37. Select no of employees joined with respect to year and month from employee table.
+select count(emp_id),extract(year from(joining_date)),extract(month from(joining_date))
+from employee e
+group by extract(year from(joining_date)),extract(month from(joining_date));
+
+----38. Select department,total salary with respect to a department from employee table where total salary greater than 800000 order by Total_Salary descending
+select department , sum(salary) total_sal from employee
+having sum(salary) >800000
+group by department 
+order by sum(salary) desc;
+
+----39. Select employee details from employee table if data in incentive table?
+select * from employee 
+where emp_id in(select employee_ref_id from incentives );
+
+----40. Select 20 % of salary from John, 10% of Salary for Roy and for other 15 % of salary from employee table
+select first_name,salary,case first_name when 'John' then salary *0.20
+                       when 'Roy' then salary *0.10
+                       else salary*0.15 end modified_sal
+from employee;
+
+----41. Select Banking as 'Bank Dept', Insurance as 'Insurance Dept' and Services as  'Services Dept' from employee table.
+select case department when 'Banking' then 'Bank Dept'
+                       when 'Insurance' then 'Insurance Dept'
+                       when 'service' then 'Services Dept'
+                       end
+from employee;
+                          
+----42. Delete employee data from employee table who got incentives in incentive table
+
+
+----43. Select first_name, incentive amount from employee and incentives table for those employees who have incentives.
+select first_name,incentive_amount from employee e join incentives i on emp_id =employee_ref_id
+
+---44. Select first_name, incentive amount from employee and incentives table for those employees who have incentives and incentive amount greater than 3000
+select first_name,i.incentive_amount from employee e join incentives i on emp_id = employee_ref_id
+where incentive_amount>3000;
+
+----45. Select first_name, incentive amount from employee and incentives table for all employees even if they didn't get incentives
+select first_name,incentive_amount from employee e join incentives i on emp_id = employee_ref_id
+union all
+select first_name , null  from employee where emp_id not in(select employee_ref_id from incentives);
+
+select first_name,incentive_amount from employee e left join incentives i on emp_id = employee_ref_id;
+
+
+----46. Select first_name, incentive amount from employee and incentives table for all employees even if they didn't get incentives 
+   --and set incentive amount as 0 for those employees who didn't get incentives.
+select first_name,incentive_amount from employee e join incentives i on emp_id = employee_ref_id
+union all
+select first_name , 0 from employee where emp_id not in(select employee_ref_id from incentives);
+
+select first_name,nvl(incentive_amount,0) from employee e left join incentives i on emp_id = employee_ref_id;
+
+   
+----47. Select first_name, incentive amount from employee and incentives table for all employees who got incentives using left join
+select first_name,incentive_amount from employee e left join incentives i on emp_id = employee_ref_id
+where incentive_amount is not null;
+
+----48. Select max incentive with respect to employee from employee and incentives table using sub query.
+select incentive_amount
+from incentives
+where incentive_amount > any(select incentive_amount 
+                          from incentives
+                          where incentive_amount > any(select incentive_amount 
+                                                       from incentives
+                                                       where incentive_amount > any(select incentive_amount 
+                                                                                    from incentives
+                                                                                     where incentive_amount >any(select incentive_amount 
+                                                                                                                 from incentives))));
+                                                                                     
+
+
+select * from employee;
+select * from incentives;
+
+
+
